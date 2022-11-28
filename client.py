@@ -1,6 +1,6 @@
 import socket
 import pickle
-import json
+import os
 def partition_data(path,no_workers):
     partitions=[]
     for i in range(no_workers):
@@ -70,8 +70,26 @@ def client_program():
             # print(parts)
         if message=='2':
             f_name=input("Input filename:")
-            client_socket.send((message,f_name))
-
+            client_socket.send(message.encode())
+            data = pickle.loads(client_socket.recv(1024))  # receive response
+            path1="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+f_name
+            path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+f_name
+            path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+f_name
+            isExist1 = os.path.exists(path1)
+            isExist2 = os.path.exists(path2)
+            isExist3 = os.path.exists(path3)
+            if isExist1==True:
+                with open(path1) as w1:
+                    for line in w1:
+                        print(line)
+            if isExist2==True:
+                with open(path2) as w2:
+                    for line in w2:
+                        print(line)
+            if isExist3==True:
+                with open(path3) as w3:
+                    for line in w3:
+                        print(line)
         message = input(" -> ")  # again take input
 
     client_socket.close()  # close the connection

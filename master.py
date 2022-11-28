@@ -1,6 +1,6 @@
 import socket
 import pickle
-import json
+import os
 
 workers=[1,2,3]
 def server_program():
@@ -25,6 +25,10 @@ def server_program():
         if data=="1":
             wok=pickle.dumps(workers)
             conn.send(wok)
+        elif data=="2":
+            path1=wok=pickle.dumps(workers)
+            conn.send(wok)
+
         # data = input(' -> ')
         # conn.send(data.encode())  # send data to the client
 
