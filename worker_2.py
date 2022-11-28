@@ -1,5 +1,6 @@
 import socket
 import pickle
+import os
 def worker2_program():
     # get the hostname
     host = socket.gethostname()
@@ -20,13 +21,22 @@ def worker2_program():
             # if data is not received break
             break
         wok=pickle.loads(data)
-        name=wok[-1][-2]
         operation=wok[-1][-1]
-        print(operation)
         if operation==1:
+            name=wok[-1][-2]
             with open('/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/'+name,mode='wt', encoding='utf-8') as myfile:
                 for lines in wok[:-1]:
                     myfile.write(lines)
+        elif int(operation)==2:
+            fname=wok[0]
+            print(fname)
+            path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fname
+            isExist= os.path.exists(path)
+            if isExist==True:
+                arr=[]
+                f=open(path,"r")
+                file_cont=f.read()
+                conn.send(pickle.dumps(file_cont))
 
     conn.close()  # close the connection
 
