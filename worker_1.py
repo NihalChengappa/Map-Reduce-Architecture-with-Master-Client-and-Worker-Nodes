@@ -1,5 +1,6 @@
 import socket
 import pickle
+import subprocess
 import os
 def worker1_program():
     # get the hostname
@@ -29,15 +30,25 @@ def worker1_program():
                     myfile.write(lines)
         elif int(operation)==2:
             fname=wok[0]
-            print(fname)
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fname
             isExist= os.path.exists(path)
             if isExist==True:
-                arr=[]
                 f=open(path,"r")
                 file_cont=f.read()
                 conn.send(pickle.dumps(file_cont))
-
+        elif int(operation)==3:
+            # print(1)
+            f_name=wok[2]
+            map_path=wok[0]
+            red_path=wok[1]
+            arg=wok[3]
+            path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"
+            isExist= os.path.exists(path+f_name)
+            if isExist==True:
+                f=open(path+f_name.split(".")[0]+"_mapped","w")
+                ps = subprocess.Popen(('cat',path+f_name ), stdout=subprocess.PIPE)
+                subprocess.call(('python3', map_path), stdin=ps.stdout,stdout=f)
+                ps.wait()
     conn.close()  # close the connection
 
 

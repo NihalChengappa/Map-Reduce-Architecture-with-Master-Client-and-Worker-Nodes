@@ -83,30 +83,12 @@ def client_program():
             print(f2)
             f3=pickle.loads(worker_conn3.recv(1024))
             print(f3)
-            # path1="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+f_name
-            # path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+f_name
-            # path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+f_name
-            # isExist1 = os.path.exists(path1)
-            # isExist2 = os.path.exists(path2)
-            # isExist3 = os.path.exists(path3)
-            # if isExist1==True:
-            #     with open(path1) as w1:
-            #         for line in w1:
-            #             print(line)
-            # if isExist2==True:
-            #     with open(path2) as w2:
-            #         for line in w2:
-            #             print(line)
-            # if isExist3==True:
-            #     with open(path3) as w3:
-            #         for line in w3:
-            #             print(line)
         if message=="3":
             mp=input("Enter mapper path:")
             rd=input("Enter reducer path:")
             fn=input("Enter file name:")
             exec=input("Enter execution command:")
-            client_socket.send(pickle.dumps((message,mp,rd,fn,exec)))
+            client_socket.send(pickle.dumps((mp,rd,fn,exec,message)))
 
         message = input(" -> ")  # again take input
         
