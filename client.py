@@ -70,7 +70,7 @@ def client_program():
             # print(parts)
         if message=='2':
             f_name=input("Input filename:")
-            client_socket.send(message.encode())
+            client_socket.send((message,f_name))
 
         message = input(" -> ")  # again take input
 
