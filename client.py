@@ -39,7 +39,7 @@ def client_program():
             ip1=input("No of worker(1-3):")
             ip2=input("Enter path of file:")
             name=ip2.split('/')[-1]
-            client_socket.send(message.encode())  # send message
+            client_socket.send(pickle.dumps((message)))  # send message
             data = pickle.loads(client_socket.recv(1024))  # receive response
             data=data[:int(ip1)]
             parts=partition_data(ip2,int(ip1))
@@ -70,7 +70,7 @@ def client_program():
             # print(parts)
         if message=='2':
             f_name=input("Input filename:")
-            client_socket.send(message.encode())
+            client_socket.send((pickle.dumps(message)))
             data = pickle.loads(client_socket.recv(1024))  # receive response
             path1="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+f_name
             path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+f_name
@@ -90,8 +90,15 @@ def client_program():
                 with open(path3) as w3:
                     for line in w3:
                         print(line)
-        message = input(" -> ")  # again take input
+        if message=="3":
+            mp=input("Enter mapper path:")
+            rd=input("Enter reducer path:")
+            fn=input("Enter file name:")
+            exec=input("Enter execution command:")
+            client_socket.send(pickle.dumps((message,mp,rd,fn,exec)))
 
+        message = input(" -> ")  # again take input
+        
     client_socket.close()  # close the connection
 
 
