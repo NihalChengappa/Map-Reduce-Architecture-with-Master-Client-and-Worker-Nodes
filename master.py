@@ -37,21 +37,25 @@ def server_program():
             isExist1 = os.path.exists(path1)
             isExist2 = os.path.exists(path2)
             isExist3 = os.path.exists(path3)
+            worker_conn1=socket.socket()
+            worker_conn2=socket.socket()
+            worker_conn3=socket.socket()
             if isExist1==True:
                 # print(1)
-                worker_conn1=socket.socket()
                 worker_conn1.connect((host,port_w[0]))
                 worker_conn1.send(pickle.dumps(data))
             if isExist2==True:
                 # print(2)
-                worker_conn2=socket.socket()
                 worker_conn2.connect((host,port_w[1]))
                 worker_conn2.send(pickle.dumps(data))
             if isExist3==True:
                 # print(3)
-                worker_conn3=socket.socket()
                 worker_conn3.connect((host,port_w[2]))
                 worker_conn3.send(pickle.dumps(data))
+            ack=pickle.loads(worker_conn1.recv(1024))
+            print(ack)
+            if(ack=="ACK"):
+                print("Mapping complete!!")
         # conn.send(data.encode())  # send data to the client
 
     conn.close()  # close the connection

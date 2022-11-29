@@ -1,5 +1,6 @@
 import socket
 import pickle
+from partition import *
 import subprocess
 import os
 def worker3_program():
@@ -45,12 +46,24 @@ def worker3_program():
             red_path=wok[1]
             arg=wok[3]
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"
+            path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"
+            path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"
             isExist= os.path.exists(path+f_name)
             if isExist==True:
                 f=open(path+f_name.split(".")[0]+"_mapped","w")
                 ps = subprocess.Popen(('cat',path+f_name ), stdout=subprocess.PIPE)
                 subprocess.call(('python3', map_path), stdin=ps.stdout,stdout=f)
                 ps.wait()
+                path_m=path+f_name.split(".")[0]+"_mapped"
+                if(os.path.exists(path_m)):
+                    count=1
+                    print(1)
+                    conn.send(pickle.dumps("ACK"))
+                if os.path.exists(path2+f_name.split(".")[0]+"_mapped"):
+                    count+=1
+                if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):
+                    count+=1
+                partition_fn(f_name.split(".")[0],path_m,count)
     conn.close()  # close the connection
 
 
