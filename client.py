@@ -89,10 +89,10 @@ def client_program():
             rd=input("Enter reducer path:")
             fn=input("Enter file name:")
             client_socket.send(pickle.dumps((mp,rd,fn,message)))
+            time.sleep(5)
             es1=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op")
             es2=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fn.split(".")[0]+"_op")
             es3=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op")
-            time.sleep(3)
             if es1==True:
                 fes1=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op","r")
                 for line in fes1:
