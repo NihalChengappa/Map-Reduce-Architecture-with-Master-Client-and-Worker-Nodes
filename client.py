@@ -1,5 +1,6 @@
 import socket
 import pickle
+import time
 import os
 def partition_data(path,no_workers):
     partitions=[]
@@ -87,9 +88,23 @@ def client_program():
             mp=input("Enter mapper path:")
             rd=input("Enter reducer path:")
             fn=input("Enter file name:")
-            exec=input("Enter execution command:")
-            client_socket.send(pickle.dumps((mp,rd,fn,exec,message)))
-
+            client_socket.send(pickle.dumps((mp,rd,fn,message)))
+            es1=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op")
+            es2=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fn.split(".")[0]+"_op")
+            es3=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op")
+            time.sleep(3)
+            if es1==True:
+                fes1=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op","r")
+                for line in fes1:
+                    print(line)
+            if es2==True:
+                fes2=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fn.split(".")[0]+"_op","r")
+                for line in fes2:
+                    print(line)
+            if es3==True:
+                fes3=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op","r")
+                for line in fes3:
+                    print(line)
         message = input(" -> ")  # again take input
         
     client_socket.close()  # close the connection

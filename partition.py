@@ -12,6 +12,5 @@ def partition_fn(fname,path,no_of_workers):
     for line in f_map:
         H_val=hash(ord(line[0]),no_of_workers)
         f=open(path_dict[H_val],"a")
-        print(path_dict[H_val])
         f.write(line)
         f.close()

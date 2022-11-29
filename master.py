@@ -56,7 +56,6 @@ def server_program():
             print(ack)
             if(ack=="ACK"):
                 print("Mapping complete!!")
-        # conn.send(data.encode())  # send data to the client
 
     conn.close()  # close the connection
 
