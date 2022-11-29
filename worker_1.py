@@ -47,20 +47,26 @@ def worker1_program():
             path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"
             isExist= os.path.exists(path+f_name)
             if isExist==True:
-                f=open(path+f_name.split(".")[0]+"_mapped","w")
+                fm=open(path+f_name.split(".")[0]+"_mapped","w")
                 ps = subprocess.Popen(('cat',path+f_name ), stdout=subprocess.PIPE)
-                subprocess.call(('python3', map_path), stdin=ps.stdout,stdout=f)
+                subprocess.call(('python3', map_path), stdin=ps.stdout,stdout=fm)
                 ps.wait()
                 path_m=path+f_name.split(".")[0]+"_mapped"
                 if(os.path.exists(path_m)):
                     count=1
-                    print(1)
                     conn.send(pickle.dumps("ACK"))
                 if os.path.exists(path2+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 partition_fn(f_name.split(".")[0],path_m,count)
+                fr=open(path+f_name.split(".")[0]+"_op","w")
+                ps2 = subprocess.Popen("cat "+path+f_name.split(".")[0]+"_partition"+" | sort -k1,1",shell=True,stdout=subprocess.PIPE)
+                # output2=subprocess.Popen(("sort -k1,1"), stdin=ps.stdout,stdout=subprocess.PIPE)
+                subprocess.call(('python3', red_path), stdin=ps2.stdout,stdout=fr)
+                ps.wait()
+                os.remove(path+f_name.split(".")[0]+"_partition")
+                
     conn.close()  # close the connection
 
 

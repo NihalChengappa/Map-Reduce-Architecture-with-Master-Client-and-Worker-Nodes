@@ -64,6 +64,12 @@ def worker2_program():
                 if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 partition_fn(f_name.split(".")[0],path_m,count)
+                fr=open(path+f_name.split(".")[0]+"_op","w")
+                ps2 = subprocess.Popen("cat "+path+f_name.split(".")[0]+"_partition"+" | sort -k1,1",shell=True,stdout=subprocess.PIPE)
+                # output2=subprocess.Popen(("sort -k1,1"), stdin=ps.stdout,stdout=subprocess.PIPE)
+                subprocess.call(('python3', red_path), stdin=ps2.stdout,stdout=fr)
+                ps.wait()
+                os.remove(path+f_name.split(".")[0]+"_partition")
     conn.close()  # close the connection
 
 
