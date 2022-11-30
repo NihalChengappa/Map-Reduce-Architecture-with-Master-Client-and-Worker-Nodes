@@ -41,28 +41,37 @@ def client_program():
             ip1=input("No of worker(1-3):")
             ip2=input("Enter path of file:")
             name=ip2.split('/')[-1]
+            for i in range(len(port_w)):
+                if(os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker"+str(i+1)+"_data/"+name)):
+                    os.remove("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker"+str(i+1)+"_data/"+name)
             client_socket.send(pickle.dumps((message)))  # send message
             data = pickle.loads(client_socket.recv(1024))  # receive response
             data=data[:int(ip1)]
             parts=partition_data(ip2,int(ip1))
             if(count<len(data)):
+                if(x==0):
+                    worker_conn1=socket.socket()
+                    worker_conn1.connect((host,port_w[0]))
+                    x=1
                 parts[0].append((name,1))
-                worker_conn1=socket.socket()
-                worker_conn1.connect((host,port_w[0]))
                 send_data=pickle.dumps(parts[0])
                 worker_conn1.send(send_data)
                 count+=1
             if(count<len(data)):
+                if(y==0):
+                    worker_conn2=socket.socket()
+                    worker_conn2.connect((host,port_w[1]))
+                    y=1
                 parts[1].append((name,1))
-                worker_conn2=socket.socket()
-                worker_conn2.connect((host,port_w[1]))
                 send_data=pickle.dumps(parts[1])
                 worker_conn2.send(send_data)
                 count+=1
             if(count<len(data)):
+                if(z==0):
+                    worker_conn3=socket.socket()
+                    worker_conn3.connect((host,port_w[2]))
+                    z=1
                 parts[2].append((name,1))
-                worker_conn3=socket.socket()
-                worker_conn3.connect((host,port_w[2]))
                 send_data=pickle.dumps(parts[2])
                 worker_conn3.send(send_data)
                 count+=1
@@ -86,11 +95,10 @@ def client_program():
             worker_conn2.send(pickle.dumps((f_name,"2")))
             worker_conn3.send(pickle.dumps((f_name,"2")))
             f1=pickle.loads(worker_conn1.recv(1024))
-            print(f1)
             f2=pickle.loads(worker_conn2.recv(1024))
-            print(f2)
             f3=pickle.loads(worker_conn3.recv(1024))
-            print(f3)
+            print(f1,f2,f3)
+            
             # worker_conn1.close()
             # worker_conn2.close()
             # worker_conn3.close()
