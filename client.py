@@ -32,7 +32,11 @@ def client_program():
     port_w=[22234,22235,22236]
     client_socket = socket.socket()  # instantiate
     client_socket.connect((host, port))  # connect to the server
-
+    print("Enter your choice:-")
+    print("1. Write a file into the worker nodes")
+    print("2. Read a file from the worker nodes")
+    print("3. Perform map reduce on a file")
+    print("4. Exit")
     message = input(" Input: ")  # take input
 
     while message.strip() != '4':
@@ -130,7 +134,12 @@ def client_program():
                 fes3=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op","r")
                 for line in fes3:
                     print(line)
-        message = input(" -> ")  # again take input
+        print("\nEnter your choice:-")
+        print("1. Write a file into the worker nodes")
+        print("2. Read a file from the worker nodes")
+        print("3. Perform map reduce on a file")
+        print("4. Exit")
+        message = input(" Input: ")  # again take input
         
     client_socket.close()  # close the connection
 

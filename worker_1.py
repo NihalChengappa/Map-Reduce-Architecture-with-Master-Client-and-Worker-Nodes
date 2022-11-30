@@ -12,7 +12,7 @@ def worker1_program():
     server_socket.bind((host, port_c))  # bind host address and port together
 
     # configure how many client the server can listen simultaneously
-    server_socket.listen(2)
+    server_socket.listen(5)
     conn, address = server_socket.accept()  # accept new connection
     print("Connection from: " + str(address))
     while True:
@@ -22,6 +22,7 @@ def worker1_program():
             # if data is not received break
             break
         wok=pickle.loads(data)
+        print(wok)
         operation=wok[-1][-1]
         if operation==1:
             name=wok[-1][-2]
@@ -36,19 +37,16 @@ def worker1_program():
                 conn.send(pickle.dumps(("ACK")))
             else:
                 conn.send(pickle.dumps(("NAK")))
-                # f=open(path,"r")
-                # file_cont=f.read()
-                # conn.send(pickle.dumps(file_cont))
         elif int(operation)==3:
-            # print(1)
             f_name=wok[2]
             map_path=wok[0]
             red_path=wok[1]
-            arg=wok[3]
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"
             path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"
             path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"
             isExist= os.path.exists(path+f_name)
+            print(1)
+            print(isExist)
             if isExist==True:
                 fm=open(path+f_name.split(".")[0]+"_mapped","w")
                 ps = subprocess.Popen(('cat',path+f_name ), stdout=subprocess.PIPE)
