@@ -97,7 +97,18 @@ def client_program():
             f1=pickle.loads(worker_conn1.recv(1024))
             f2=pickle.loads(worker_conn2.recv(1024))
             f3=pickle.loads(worker_conn3.recv(1024))
-            print(f1,f2,f3)
+            if f1=="ACK":
+                f11=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+f_name,"r")
+                for line in f11:
+                    print(line)
+            if f2=="ACK":
+                f22=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+f_name,"r")
+                for line in f22:
+                    print(line)
+            if f3=="ACK":
+                f33=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+f_name,"r")
+                for line in f33:
+                    print(line)
         if message=="3":
             mp=input("Enter mapper path:")
             rd=input("Enter reducer path:")

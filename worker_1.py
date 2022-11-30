@@ -33,9 +33,12 @@ def worker1_program():
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fname
             isExist= os.path.exists(path)
             if isExist==True:
-                f=open(path,"r")
-                file_cont=f.read()
-                conn.send(pickle.dumps(file_cont))
+                conn.send(pickle.dumps(("ACK")))
+            else:
+                conn.send(pickle.dumps(("NAK")))
+                # f=open(path,"r")
+                # file_cont=f.read()
+                # conn.send(pickle.dumps(file_cont))
         elif int(operation)==3:
             # print(1)
             f_name=wok[2]
