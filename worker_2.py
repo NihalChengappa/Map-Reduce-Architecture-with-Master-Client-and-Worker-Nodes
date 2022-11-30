@@ -31,7 +31,6 @@ def worker2_program():
                     myfile.write(lines)
         elif int(operation)==2:
             fname=wok[0]
-            print(fname)
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fname
             isExist= os.path.exists(path)
             if isExist==True:
@@ -57,8 +56,8 @@ def worker2_program():
                 path_m=path+f_name.split(".")[0]+"_mapped"
                 if(os.path.exists(path_m)):
                     count=1
-                    print(1)
-                    conn.send(pickle.dumps("ACK"))
+                    # print(1)
+                    # conn.send(pickle.dumps("ACK"))
                 if os.path.exists(path2+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):

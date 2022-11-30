@@ -54,7 +54,7 @@ def worker1_program():
                 path_m=path+f_name.split(".")[0]+"_mapped"
                 if(os.path.exists(path_m)):
                     count=1
-                    conn.send(pickle.dumps("ACK"))
+                    # conn.send(pickle.dumps("ACK"))
                 if os.path.exists(path2+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):

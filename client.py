@@ -98,10 +98,6 @@ def client_program():
             f2=pickle.loads(worker_conn2.recv(1024))
             f3=pickle.loads(worker_conn3.recv(1024))
             print(f1,f2,f3)
-            
-            # worker_conn1.close()
-            # worker_conn2.close()
-            # worker_conn3.close()
         if message=="3":
             mp=input("Enter mapper path:")
             rd=input("Enter reducer path:")

@@ -31,7 +31,6 @@ def worker3_program():
                     myfile.write(lines)
         elif int(operation)==2:
             fname=wok[0]
-            print(fname)
             path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fname
             isExist= os.path.exists(path)
             if isExist==True:
