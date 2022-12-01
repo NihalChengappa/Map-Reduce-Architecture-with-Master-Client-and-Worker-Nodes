@@ -1,12 +1,10 @@
 def hash(key,no_of_workers):
     return key%no_of_workers
 def partition_fn(fname,path,no_of_workers):
-    # print("parttition")
     path_dict={}
     i=0
     while(i<no_of_workers):
         path_dict[i]="Worker"+str(i+1)+"_data/"+fname+"_partition"
-        # print(i,path_dict[i])
         i+=1
     f_map=open(path,"r")
     for line in f_map:

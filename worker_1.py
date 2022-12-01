@@ -4,22 +4,16 @@ import subprocess
 from partition import *
 import os
 def worker1_program():
-    # get the hostname
     host = socket.gethostname()
-    port_c = 22234 # initiate port no above 1024
-    server_socket = socket.socket()  # get instance
-    # look closely. The bind() function takes tuple as argument
-    server_socket.bind((host, port_c))  # bind host address and port together
-
-    # configure how many client the server can listen simultaneously
+    port_c = 22234 
+    server_socket = socket.socket() 
+    server_socket.bind((host, port_c)) 
     server_socket.listen(5)
-    conn, address = server_socket.accept()  # accept new connection
+    conn, address = server_socket.accept()  
     print("Connection from: " + str(address))
     while True:
-        # receive data stream. it won't accept data packet greater than 1024 bytes
         data = conn.recv(1024)
         if not data:
-            # if data is not received break
             break
         wok=pickle.loads(data)
         print(wok)
@@ -55,7 +49,6 @@ def worker1_program():
                 path_m=path+f_name.split(".")[0]+"_mapped"
                 if(os.path.exists(path_m)):
                     count=1
-                    # conn.send(pickle.dumps("ACK"))
                 if os.path.exists(path2+f_name.split(".")[0]+"_mapped"):
                     count+=1
                 if os.path.exists(path3+f_name.split(".")[0]+"_mapped"):
@@ -66,7 +59,7 @@ def worker1_program():
                 subprocess.call(('python3', red_path), stdin=ps2.stdout,stdout=fr)
                 ps2.wait()
                 os.remove(path+f_name.split(".")[0]+"_partition")
-    conn.close()  # close the connection
+    conn.close()  
 
 
 if __name__ == '__main__':

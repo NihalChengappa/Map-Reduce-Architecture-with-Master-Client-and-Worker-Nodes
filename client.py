@@ -27,17 +27,17 @@ def partition_data(path,no_workers):
 
 def client_program():
     x,y,z=0,0,0
-    host = socket.gethostname()  # as both code is running on same pc
-    port = 5000  # socket server port number
+    host = socket.gethostname() 
+    port = 5000  
     port_w=[22234,22235,22236]
-    client_socket = socket.socket()  # instantiate
-    client_socket.connect((host, port))  # connect to the server
+    client_socket = socket.socket()  
+    client_socket.connect((host, port)) 
     print("Enter your choice:-")
     print("1. Write a file into the worker nodes")
     print("2. Read a file from the worker nodes")
     print("3. Perform map reduce on a file")
     print("4. Exit")
-    message = input(" Input: ")  # take input
+    message = input(" Input: ")  
 
     while message.strip() != '4':
         count=0
@@ -48,8 +48,8 @@ def client_program():
             for i in range(len(port_w)):
                 if(os.path.exists("Worker"+str(i+1)+"_data/"+name)):
                     os.remove("Worker"+str(i+1)+"_data/"+name)
-            client_socket.send(pickle.dumps((message)))  # send message
-            data = pickle.loads(client_socket.recv(1024))  # receive response
+            client_socket.send(pickle.dumps((message)))  
+            data = pickle.loads(client_socket.recv(1024))  
             data=data[:int(ip1)]
             parts=partition_data(ip2,int(ip1))
             if(count<len(data)):
@@ -82,7 +82,7 @@ def client_program():
         if message=='2':
             f_name=input("Input filename:")
             client_socket.send((pickle.dumps(message)))
-            data = pickle.loads(client_socket.recv(1024))  # receive response
+            data = pickle.loads(client_socket.recv(1024)) 
             if(x==0):
                 worker_conn1=socket.socket()
                 worker_conn1.connect((host,port_w[0]))
@@ -139,9 +139,9 @@ def client_program():
         print("2. Read a file from the worker nodes")
         print("3. Perform map reduce on a file")
         print("4. Exit")
-        message = input(" Input: ")  # again take input
+        message = input(" Input: ")  
         
-    client_socket.close()  # close the connection
+    client_socket.close() 
 
 
 if __name__ == '__main__':
