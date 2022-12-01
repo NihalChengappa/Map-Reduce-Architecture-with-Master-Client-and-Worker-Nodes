@@ -46,8 +46,8 @@ def client_program():
             ip2=input("Enter path of file:")
             name=ip2.split('/')[-1]
             for i in range(len(port_w)):
-                if(os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker"+str(i+1)+"_data/"+name)):
-                    os.remove("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker"+str(i+1)+"_data/"+name)
+                if(os.path.exists("Worker"+str(i+1)+"_data/"+name)):
+                    os.remove("Worker"+str(i+1)+"_data/"+name)
             client_socket.send(pickle.dumps((message)))  # send message
             data = pickle.loads(client_socket.recv(1024))  # receive response
             data=data[:int(ip1)]
@@ -102,15 +102,15 @@ def client_program():
             f2=pickle.loads(worker_conn2.recv(1024))
             f3=pickle.loads(worker_conn3.recv(1024))
             if f1=="ACK":
-                f11=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+f_name,"r")
+                f11=open("Worker1_data/"+f_name,"r")
                 for line in f11:
                     print(line)
             if f2=="ACK":
-                f22=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+f_name,"r")
+                f22=open("Worker2_data/"+f_name,"r")
                 for line in f22:
                     print(line)
             if f3=="ACK":
-                f33=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+f_name,"r")
+                f33=open("Worker3_data/"+f_name,"r")
                 for line in f33:
                     print(line)
         if message=="3":
@@ -119,19 +119,19 @@ def client_program():
             fn=input("Enter file name:")
             client_socket.send(pickle.dumps((mp,rd,fn,message)))
             time.sleep(5)
-            es1=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op")
-            es2=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fn.split(".")[0]+"_op")
-            es3=os.path.exists("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op")
+            es1=os.path.exists("Worker1_data/"+fn.split(".")[0]+"_op")
+            es2=os.path.exists("Worker2_data/"+fn.split(".")[0]+"_op")
+            es3=os.path.exists("Worker3_data/"+fn.split(".")[0]+"_op")
             if es1==True:
-                fes1=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fn.split(".")[0]+"_op","r")
+                fes1=open("Worker1_data/"+fn.split(".")[0]+"_op","r")
                 for line in fes1:
                     print(line)
             if es2==True:
-                fes2=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+fn.split(".")[0]+"_op","r")
+                fes2=open("Worker2_data/"+fn.split(".")[0]+"_op","r")
                 for line in fes2:
                     print(line)
             if es3==True:
-                fes3=open("/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+fn.split(".")[0]+"_op","r")
+                fes3=open("Worker3_data/"+fn.split(".")[0]+"_op","r")
                 for line in fes3:
                     print(line)
         print("\nEnter your choice:-")

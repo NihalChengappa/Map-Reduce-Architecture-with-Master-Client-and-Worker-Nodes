@@ -32,9 +32,9 @@ def server_program():
             wok=pickle.dumps(workers)
             conn.send(wok)
         elif data[-1]=="3":
-            path1="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+data[2]
-            path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"+data[2]
-            path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"+data[2]
+            path1="Worker1_data/"+data[2]
+            path2="Worker2_data/"+data[2]
+            path3="Worker3_data/"+data[2]
             isExist1 = os.path.exists(path1)
             isExist2 = os.path.exists(path2)
             isExist3 = os.path.exists(path3)

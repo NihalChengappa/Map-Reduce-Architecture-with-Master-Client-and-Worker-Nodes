@@ -5,7 +5,7 @@ def partition_fn(fname,path,no_of_workers):
     path_dict={}
     i=0
     while(i<no_of_workers):
-        path_dict[i]="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker"+str(i+1)+"_data/"+fname+"_partition"
+        path_dict[i]="Worker"+str(i+1)+"_data/"+fname+"_partition"
         # print(i,path_dict[i])
         i+=1
     f_map=open(path,"r")

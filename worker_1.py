@@ -26,12 +26,12 @@ def worker1_program():
         operation=wok[-1][-1]
         if operation==1:
             name=wok[-1][-2]
-            with open('/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/'+name,mode='wt', encoding='utf-8') as myfile:
+            with open('Worker1_data/'+name,mode='wt', encoding='utf-8') as myfile:
                 for lines in wok[:-1]:
                     myfile.write(lines)
         elif int(operation)==2:
             fname=wok[0]
-            path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"+fname
+            path="Worker1_data/"+fname
             isExist= os.path.exists(path)
             if isExist==True:
                 conn.send(pickle.dumps(("ACK")))
@@ -41,9 +41,9 @@ def worker1_program():
             f_name=wok[2]
             map_path=wok[0]
             red_path=wok[1]
-            path="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker1_data/"
-            path2="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker2_data/"
-            path3="/home/pes2ug20cs224/Desktop/BD-Project/YAMR/Worker3_data/"
+            path="Worker1_data/"
+            path2="Worker2_data/"
+            path3="Worker3_data/"
             isExist= os.path.exists(path+f_name)
             print(1)
             print(isExist)
